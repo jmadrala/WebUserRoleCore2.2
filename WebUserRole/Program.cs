@@ -7,6 +7,10 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using WebUserRole.Models;
 
 namespace WebUserRole
 {
@@ -14,7 +18,19 @@ namespace WebUserRole
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            // CreateWebHostBuilder(args).Build().Run(); // orginal 
+
+            // Add New
+            var host = CreateWebHostBuilder(args).Build();
+
+            var configuration = host.Services.GetRequiredService<IConfiguration>();
+            using (var scope = host.Services.CreateScope())
+            {
+                //var roleManage=scope.ServiceProvider
+
+                SeedUserRole.CreateRoles(scope.ServiceProvider, configuration).Wait();
+            }
+
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
