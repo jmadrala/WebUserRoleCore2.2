@@ -38,3 +38,5 @@ msbuild.wrn
 
 # User specific files / dirs
 /Image
+/Empty_Data
+
