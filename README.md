@@ -12,7 +12,7 @@ In the first step create in Visual Studio 2019 a New ASP.NEt Web Application wit
 We want to be able to modify the source code of login registration forms, etc. Therefore, we will add the creation of the identity framework.
 We will transfer the base  for in folder App_Data. See you file appsettings.json and change in  "ConnectionStrings": {"DefaultConnection": .... Look this
 
-    https://stackoverflow.com/questions/37058684/how-to-set-the-right-attachdbfilename-relative-path-in-asp-net-core
+https://stackoverflow.com/questions/37058684/how-to-set-the-right-attachdbfilename-relative-path-in-asp-net-core
 
 1. 
 ![NewScaffoldedItem](https://github.com/jmadrala/WebUserRoleCore2.2/tree/Step2/Image/1_NewScaffoldedItem.PNG "1")
