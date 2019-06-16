@@ -25,7 +25,7 @@ namespace WebUserRole
         public Startup(IConfiguration configuration, IHostingEnvironment env) // Changed
         {
             Configuration = configuration;
-            _contentRootPath = env.ContentRootPath; // added
+            _contentRootPath = env.ContentRootPath; // Added
         }
 
         public IConfiguration Configuration { get; }
@@ -53,6 +53,9 @@ namespace WebUserRole
                 //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")) //Original
                 );
             services.AddDefaultIdentity<IdentityUser>()
+                
+                .AddRoles<IdentityRole>() // Added 
+
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
