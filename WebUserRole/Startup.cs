@@ -18,9 +18,14 @@ namespace WebUserRole
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private string _contentRootPath = ""; //Added
+
+
+        //public Startup(IConfiguration configuration) //Original
+        public Startup(IConfiguration configuration, IHostingEnvironment env) // Changed
         {
             Configuration = configuration;
+            _contentRootPath = env.ContentRootPath; // added
         }
 
         public IConfiguration Configuration { get; }
@@ -28,6 +33,14 @@ namespace WebUserRole
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Added
+            string conn = Configuration.GetConnectionString("DefaultConnection");
+            if (conn.Contains("%CONTENTROOTPATH%"))
+            {
+                conn = conn.Replace("%CONTENTROOTPATH%", _contentRootPath);
+            }
+            //---
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -36,8 +49,9 @@ namespace WebUserRole
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(conn) //Added
+                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")) //Original
+                );
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

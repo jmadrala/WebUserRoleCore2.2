@@ -37,6 +37,5 @@ msbuild.wrn
 .vs/
 
 # User specific files / dirs
-/Image
 /Empty_Data
 
