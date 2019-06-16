@@ -18,18 +18,7 @@ namespace WebUserRole
     {
         public static void Main(string[] args)
         {
-            // CreateWebHostBuilder(args).Build().Run(); // orginal 
-
-            // Add New
-            var host = CreateWebHostBuilder(args).Build();
-
-            var configuration = host.Services.GetRequiredService<IConfiguration>();
-            using (var scope = host.Services.CreateScope())
-            {
-                //var roleManage=scope.ServiceProvider
-
-                SeedUserRole.CreateRoles(scope.ServiceProvider, configuration).Wait();
-            }
+            CreateWebHostBuilder(args).Build().Run(); // orginal 
 
         }
 
